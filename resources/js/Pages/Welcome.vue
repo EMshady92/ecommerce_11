@@ -3,11 +3,12 @@ import { Head, Link } from '@inertiajs/vue3';
 import metricsbanner from '@/Pages/Cover/MetricsBanner.vue';
 import navbarcover from '@/Pages/Cover/NavBarCover.vue';
 import slider from '@/Pages/Cover/Slider.vue';
+import product_card from '@/Pages/Cover/ProducCard.vue';
+import shopping_cart_counter from '@/Pages/Cover/ShoppingCartCounter.vue';
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    laravelVersion: String,
-    phpVersion: String,
+    products: Array
 });
 </script>
 
@@ -17,16 +18,30 @@ defineProps({
 
     <div class="w-full h-screen flex justify-center">
         <div class="w-[80%]">
+            <div class="floating">
+
+<a href="{{url('/carrito')}}" class="btn-fab">
+    <i class="fa-solid fa-cart-shopping"></i>  <shopping_cart_counter></shopping_cart_counter>
+
+</a>
+<!-- <product-counter-component onMouseover="this.style.color='red'" onMouseout="this.style.color='white'" :count="{{$productsCount}}"></product-counter-component>
+ --></div>
             <metricsbanner />
 
             <navbarcover link="Link"
                 :canLogin="canLogin"
                 :canRegister="canRegister"
-                :laravelVersion="laravelVersion"
-                :phpVersion="phpVersion"
             />
 
             <slider class="mt-2"/>
+
+           <div class="grid grid-cols-3 gap-4">
+            <div v-for="product in products" :key="product.id" class="border p-4 rounded">
+                <product_card :product="product" />
+
+                </div>
+
+           </div>
 
         </div>
     </div>
@@ -58,7 +73,7 @@ defineProps({
     </div> -->
 </template>
 
-<style>
+<style scoped>
 .bg-dots-darker {
     background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(0,0,0,0.07)'/%3E%3C/svg%3E");
 }
@@ -66,5 +81,35 @@ defineProps({
     .dark\:bg-dots-lighter {
         background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.22676 0C1.91374 0 2.45351 0.539773 2.45351 1.22676C2.45351 1.91374 1.91374 2.45351 1.22676 2.45351C0.539773 2.45351 0 1.91374 0 1.22676C0 0.539773 0.539773 0 1.22676 0Z' fill='rgba(255,255,255,0.07)'/%3E%3C/svg%3E");
     }
+}
+
+.floating{
+
+position:fixed;
+top:2em;
+right:5em;
+z-index:100;
+
+}
+
+.btn-fab{
+border: 2px solid transparent;
+height: 100px;
+padding: 10px 10px;
+background-color: #D10024;
+color: #FFF;
+text-transform: uppercase;
+font-weight: 700;
+border-radius: 100%;
+-webkit-transition: 0.2s all;
+transition: 0.2s all;
+  border: none;
+  border-radius: 40px 40px 40px 40px;
+}
+.btn-fab:hover {
+background-color: #D10024;
+color: #FFF;
+border-color: #D10024;
+padding: 10px 10px;
 }
 </style>

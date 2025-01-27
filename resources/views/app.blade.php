@@ -6,13 +6,30 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
+         <!-- Scripts -->
+
+
+         {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.css">
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js"></script> --}}
+         <!-- Add this in the <head> section of your Blade template -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/flexslider.css"> <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/flexslider/2.7.2/jquery.flexslider-min.js"></script>
+
+
+
+<!-- Add this before the closing </body> tag -->
+
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
+
+
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         {{-- stylles --}}
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css">
-        <!-- Scripts -->
-        <script src="https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js"></script>
+        <script src="https://kit.fontawesome.com/786864cd05.js" crossorigin="anonymous"></script>
 
         @routes
         @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])

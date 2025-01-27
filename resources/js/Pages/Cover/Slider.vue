@@ -88,18 +88,16 @@ asdasdasds
         </span>
     </div>
 </template> -->
+
 <template>
-    <div class="glider-contain">
-        <div class="glider">
-            <div v-for="(image, index) in images" :key="index"> <img :src="image" :alt="'Image ' + (index + 1)" class="w-full h-auto"> </div>
-        </div>
-    <button aria-label="Previous" class="glider-prev">«</button>
-    <button aria-label="Next" class="glider-next">»</button>
-    <div role="tablist" class="dots"></div>
-</div>
+    <div class="flexslider">
+    <ul class="slides">
 
+            <li v-for="(image, index) in images" :key="index"> <img :src="image" :alt="'Image ' + (index + 1)" class="w-full h-auto"> </li>
 
-  </template>
+    </ul>
+    </div>
+</template>
 
   <script>
 
@@ -108,21 +106,16 @@ asdasdasds
       return {
         images: [
           '/images/bannergit.png',
-          '/images/logo_contractor.png',
+          '/images/banner_ver.png',
         ],
       };
     },
     mounted() {
-        new Glider(document.querySelector('.glider'), {
-  slidesToShow: 5,
-  slidesToScroll: 5,
-  draggable: true,
-  dots: '.dots',
-  arrows: {
-    prev: '.glider-prev',
-    next: '.glider-next'
-  }
-});
+        $('.flexslider').flexslider({
+    animation: "slide",
+    rtl: true,
+    controlNav: "thumbnails",
+  });
     }
   };
   </script>
