@@ -1,7 +1,8 @@
 <script setup>
 defineProps({
     headers: Array,
-    items: Array
+    items: Array,
+    openModal: Function
 });
 
 function formatPrice(value) {
@@ -46,7 +47,7 @@ function formatPrice(value) {
                     </template>
                 </td>
                 <td class="py-2 px-4 border-b text-center">
-                    <button @click="handleButtonClick(item)" class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                    <button @click="openModal(item)" class="bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
                 </td>
             </tr>
         </tbody>

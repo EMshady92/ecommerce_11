@@ -35,7 +35,7 @@ defineProps({
 
             <slider class="mt-2"/>
 
-           <div class="grid grid-cols-3 gap-4">
+           <div class="grid grid-cols-4 gap-4">
             <div v-for="product in products" :key="product.id" class="border p-4 rounded">
                 <product_card :product="product" />
 

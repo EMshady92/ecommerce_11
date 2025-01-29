@@ -19,6 +19,9 @@ use Inertia\Inertia;
 
 Route::get('/', [MainController::class, 'home']);
 Route::resource('products',ProductController::class);
+Route::get('products_get',[ProductController::class, 'products_get']);
+Route::post('save_product',[ProductController::class, 'save_product']);
+Route::post('update_product/{id}', [ProductController::class, 'update_product']);
 
 Route::middleware([
     'auth:sanctum',

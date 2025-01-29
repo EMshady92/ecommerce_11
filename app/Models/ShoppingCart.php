@@ -37,7 +37,7 @@ class ShoppingCart extends Model
 
     //obtener todos los productos
     public function products(){
-     return $this->belongsToMany('App\Product','product_in_shopping_carts');
+     return $this->belongsToMany('App\Models\Product','product_in_shopping_carts');
                                   //nombre del modelo a extraer registro , nombre de la tabla que relaciona en BD
       }
 

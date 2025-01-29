@@ -11,7 +11,7 @@ function formatPrice(value) { // 12345.67 => $12,345.67 fornato  de moneda
 }
 </script>
 <template>
-     <article class="max-w-sm w-full bg-white rounded-lg shadow-lg overflow-hidden">
+     <article class="w-full bg-white rounded-lg shadow-lg overflow-hidden">
     <div>
       <!-- <img class="object-cover h-64 w-full" src="{{product.image_url}}'" alt="Converse sneakers" /> -->
       <img class="object-cover h-64 w-full" :src="product.image_url" :alt="product.name" />
@@ -25,16 +25,16 @@ function formatPrice(value) { // 12345.67 => $12,345.67 fornato  de moneda
 
     </div>
 
-    <div class="flex gap-4 mt-4 px-4">
-      <span class="sr-only">Colors available</span>
 
-      <button aria-label="Yellow" class="p-1 border border-gray-200  rounded-full cursor-pointer bg-yellow-500 "></button>
-
-      <button aria-label="Red" class="p-1 border border-gray-200  rounded-full cursor-pointer bg-red-500 "></button>
-
-      <button aria-label="Blue" class="p-1 border border-gray-200  rounded-full cursor-pointer bg-blue-500 "></button>
-
-      <button aria-label="Black" class="p-1 border border-gray-200  rounded-full cursor-pointer bg-gray-800 "></button>
+    <div class="flex items-center mt-2  mx-1">
+      <span v-for="star in 5" :key="star" class="text-yellow-500">
+        <svg v-if="star <= rating" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
+        <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        </svg>
+      </span>
     </div>
 
     <div class="mt-4 p-4 border-t border-gray-200 ">
