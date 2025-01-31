@@ -1,4 +1,7 @@
 <script setup>
+
+import add_to_cart from '@/Pages/Cover/AddToCart.vue';
+
 defineProps({
     product: Object
 });
@@ -38,12 +41,7 @@ function formatPrice(value) { // 12345.67 => $12,345.67 fornato  de moneda
     </div>
 
     <div class="mt-4 p-4 border-t border-gray-200 ">
-      <button class="w-1/3 rounded-md px-1 bg-red-500 flex justify-between items-center font-bold cursor-pointer hover:underline text-white">
-        <span class="text-base">Add to Cart</span>
-        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-        </svg>
-      </button>
+        <add_to_cart :product="product"/>
     </div>
   </article>
   </template>

@@ -1,9 +1,9 @@
 <template>
-    <a class="colorcounter" href="/carrito">5</a>
+    <a class="colorcounter" href="/carrito">{{productsCount}}</a>
 </template>
 
   <script>
- /*  export default {
+  export default {
     props:["count"],
     created(){
       window.store.commit("set",this.count)
@@ -13,5 +13,5 @@
         return window.store.state.productsCount;
       }
     }
-  } */
+  }
   </script>
