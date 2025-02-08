@@ -8,7 +8,8 @@ import shopping_cart_counter from '@/Pages/Cover/ShoppingCartCounter.vue';
 defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
-    products: Array
+    products: Array,
+    productsCount: Number
 });
 </script>
 
@@ -20,8 +21,9 @@ defineProps({
         <div class="w-[80%]">
             <div class="floating">
 
-<a href="{{url('/carrito')}}" class="btn-fab">
-    <i class="fa-solid fa-cart-shopping"></i>  <shopping_cart_counter></shopping_cart_counter>
+<a  class="btn-fab py-2">
+    <i class="fa-solid fa-cart-shopping py-2"></i>
+    <shopping_cart_counter :count="productsCount"></shopping_cart_counter> <!-- Usa productsCount aquí -->
 
 </a>
 <!-- <product-counter-component onMouseover="this.style.color='red'" onMouseout="this.style.color='white'" :count="{{$productsCount}}"></product-counter-component>

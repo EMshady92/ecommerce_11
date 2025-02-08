@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('shopping_carts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('customid')->unique()->nullable();
-            $table->integer('status')->default(0);
-            $table->string('email')->nullable();
+        Schema::create('currencies', function (Blueprint $table) {
+            $table->string('iso',3)->primary();
             $table->timestamps();
         });
     }
@@ -25,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('shopping_carts');
+        Schema::dropIfExists('currencies');
     }
 };

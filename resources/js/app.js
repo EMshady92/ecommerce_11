@@ -5,22 +5,7 @@ import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
-
-window.store = new Vuex.Store({
-    state: {
-      productsCount: 0
-    },
-    mutations:{
-      increment(state){
-        return state.productsCount++
-      },
-      set(state,value){
-        return state.productsCount = value
-      }
-    }
-
-  })
-
+import store from './store.js';
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -30,6 +15,7 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)
+            .use(store)
             .mount(el);
     },
     progress: {

@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         //session($sessionName); //extrae la session
         //$request->session()->get($sessionName); //extrae sesison , cualquiera de las dos es valida
         //-\Session::get($sessionName); //al igal que esta es valida para obtener la sesion.
-        $view->with('productsCount',$shopping_cart->productsCount());
+        $view->with('productsCount',$shopping_cart->productsCount()); //
 
 });
     }

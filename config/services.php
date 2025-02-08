@@ -21,6 +21,38 @@ return [
         'scheme' => 'https',
     ],
 
+    'mercadopago' => [
+        'base_uri' => env('MERCADOPAGO_BASE_URI'),
+        'key' => env('MERCADOPAGO_KEY'),
+        'secret' => env('MERCADOPAGO_SECRET'),
+        'base_currency' => 'mxn',
+        'class' => App\Services\MercadoPagoService::class,
+    ],
+
+    'stripe' => [
+        'base_uri' => env('STRIPE_BASE_URI'),
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+        'class' => App\Services\StripeService::class,
+    ],
+
+    'paypal' => [
+        'base_uri' => env('PAYPAL_BASE_URI'),
+        'client_id' => env('PAYPAL_CLIENT_ID'),
+        'client_secret' => env('PAYPAL_CLIENT_SECRET'),
+        'class' => App\Services\PayPalService::class,
+    ],
+
+    'payu' => [
+        'base_uri' => env('PAYU_BASE_URI'),
+        'account_id' => env('PAYU_BASE_ACCOUNT_ID'),
+        'merchant_id' => env('PAYU_BASE_MERCHANT_ID'),
+        'key' => env('PAYU_KEY'),
+        'secret' => env('PAYU_SECRET'),
+        'base_currency' => 'mxn',
+        'class' => App\Services\PayUService::class,
+    ],
+
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
