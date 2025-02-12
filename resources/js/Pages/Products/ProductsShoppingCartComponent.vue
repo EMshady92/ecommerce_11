@@ -3,6 +3,7 @@
 import metricsbanner from '@/Pages/Cover/MetricsBanner.vue';
 import navbarcover from '@/Pages/Cover/NavBarCover.vue';
 import paypalcollapse from '@/Pages/PayPlatforms/PaypalCollapse.vue';
+import stripecollapse from '@/Pages/PayPlatforms/StripeCollapse.vue';
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
@@ -15,6 +16,10 @@ defineProps({
     canLogin: Boolean,
     canRegister: Boolean,
     paymentPlatforms: Array,
+    shopping_cart_id: String,
+    keyStripe:String,
+    name_user:String,
+    email_user:String
 });
 
 const endpoint = 'carrito/productos';
@@ -22,6 +27,7 @@ const products = ref([]);
 const selectedPaymentPlatform = ref(null);
 const components = {
     paypalcollapse, // Registra el componente manualmente para quee aparezca
+    stripecollapse, // Registra el componente manualmente para quee aparezca
 };
 
 const total = computed(() => {
@@ -52,7 +58,6 @@ function selectPaymentPlatform(id) {
 }
 
 function getComponentName(name) {
-
     return `${name.toLowerCase()}collapse`;
 }
 
@@ -172,13 +177,15 @@ onMounted(() => {
                                         <!-- Renderizado dinámico del componente -->
                                         <div v-for="paymentPlatform in paymentPlatforms" :key="paymentPlatform.id">
                                             <div v-if="selectedPaymentPlatform === paymentPlatform.id">
-                                                <component class="w-full" :is="components[getComponentName(paymentPlatform.name)]" />
+                                                <component class="w-full" :is="components[getComponentName(paymentPlatform.name)]"
+                                                v-bind="getComponentName(paymentPlatform.name) === 'stripecollapse' ? { keyStripe,name_user,email_user } : {}" />
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
                                 <input type="hidden" name="value" :value="total_pay"> <!-- Añade el valor total aquí -->
+                                <input type="hidden" name="shopping_cart_id" :value="shopping_cart_id">
 
                         </div>
                         <div class="text-center mt-3">

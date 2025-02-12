@@ -16,6 +16,7 @@ class PaymentController extends Controller
     }
 
     public function pay(Request $request){
+
         $rules  = [
             'value' => ['required','numeric','min:5'],
             'currency' => ['required','exists:currencies,iso'],
@@ -28,7 +29,7 @@ class PaymentController extends Controller
         ->resolveService($request->payment_platform);
 
         session()->put('paymentPlatformId', $request->payment_platform); //agregamos a la  session el id que esta en request ppara usarlo en approval
-
+        session()->put('shopping_cart_id', $request->shopping_cart_id);
         return $paymentPlatform->handlePayment($request);
     }
     //cuando ya se aprobo el pago llega aqui
@@ -38,7 +39,7 @@ class PaymentController extends Controller
             $paymentPlatform = $this->paymentPlatformResolver
             ->resolveService(session()->get('paymentPlatformId'));
 
-            return $paymentPlatform->handleApproval();
+            return $paymentPlatform->handleApproval(session()->get('shopping_cart_id'));
         }
 
 

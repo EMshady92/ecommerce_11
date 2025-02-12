@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Traits\ConsumesExternalServices;
 
+use Illuminate\Support\Facades\Auth;
+
+use App\Models\Order;
+
+use Inertia\Inertia;
+
 class StripeService{
     use ConsumesExternalServices;
 
@@ -54,7 +60,7 @@ class StripeService{
 
     }
 
-    public function handleApproval()
+    public function handleApproval($shoping_cart_id)
     {
         if(session()->has('paymentIntentId')){ //si  se cuentra  paymentIntentId en la sesion
             $paymentIntentId = session()->get('paymentIntentId');
@@ -74,9 +80,25 @@ class StripeService{
                 $currency = strtoupper($confirmation->currency);
                 $amount = $confirmation->amount / $this->resolveFactor($currency);
 
-                return redirect()
-                    ->route('home')
-                    ->withSuccess(['payment' => "Thanks. We received your {$amount}{$currency} payment."]);
+
+                $new_order = [
+                    'name' => Auth::user()->name,
+                    'shopping_cart_id' => intval($shoping_cart_id),
+                    'total' => $confirmation->amount,
+                    'currency' => $confirmation->currency,
+                    'email' => Auth::user()->email,
+                  ];
+
+                /* name' => $name,
+                      'shopping_cart_id' => intval($shoping_cart_id),
+                      'total' => $amount,
+                      'currency' => $currency,
+                      'email' => $email, */
+
+                $new_order = Order::createFromStripeResponse($new_order, $shoping_cart_id);
+                return Inertia::render('Orders/Ticket', [
+                    'order' => $new_order,
+                ]);
             }
         }
 

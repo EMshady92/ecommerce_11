@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductInShoppingCartsController;
 use App\Http\Controllers\ShoppingCartController;
 use Inertia\Inertia;
-
+use App\Http\Controllers\OrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +31,11 @@ Route::get('/carrito/productos', [ShoppingCartController::class,'products'])->na
 Route::post('/payments/pay', [App\Http\Controllers\PaymentController::class, 'pay'])->name('pay');
 Route::get('/payments/approval', [App\Http\Controllers\PaymentController::class, 'approval'])->name('approval');
 Route::get('/payments/cancelled', [App\Http\Controllers\PaymentController::class, 'cancelled'])->name('cancelled');
+
+
+
+
+Route::get('ticket', [OrderController::class, 'show'])->name('ticket');
 
 Route::middleware([
     'auth:sanctum',

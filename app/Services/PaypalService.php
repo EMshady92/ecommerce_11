@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Traits\ConsumesExternalServices;
 
+use App\Models\Order;
+
+use Inertia\Inertia;
+
 class PayPalService{
     use ConsumesExternalServices;
 
@@ -50,27 +54,26 @@ class PayPalService{
         return redirect($approve->href);
     }
 
-    public function handleApproval(){
+    public function handleApproval($shoping_cart_id){
+
         if(session()->has('approvalId')){
             $approvalId = session()->get('approvalId'); //busco id
             //llamo metodo capturar pago
             $payment = $this->capturePayment($approvalId);
 
-            //recorre approval respuesta y y  recorre y obtiene valores name , payment, currency, amount,  que estan dentro de ella
-            $name = $payment->payer->name->given_name;
-            $payment = $payment->purchase_units[0]->payments->captures[0]->amount;
-            $amount = $payment->value;
-            $currency = $payment->currency_code;
 
-            return redirect()
-            ->route('home')
-           ->withSuccess(['payment'=>"thanks,{$name}. we received your {$amount}{$currency} payment."]);
+            $order = Order::createFromPayPalResponse($payment, $shoping_cart_id);
+            if($order){
+               /*  return redirect()->route('ticket', ['order' => $order]); */
+                return Inertia::render('Orders/Ticket', [
+                    'order' => $order,
+                ]);
+              }
+
+              return redirect()
+              ->route('home')
+              ->withErrors('no se puede capturar pago');
         }
-
-        return redirect()
-        ->route('home')
-        ->withErrors('no se puede capturar pago');
-
     }
 
     public function createOrder($value,$currency){
